@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="brand">#2A5BD7</color>
+    <color name="brand_dark">#1D45A8</color>
+    <color name="risk_low">#1A7F4B</color>
+    <color name="risk_moderate">#B26A00</color>
+    <color name="risk_high">#C0392B</color>
+</resources>

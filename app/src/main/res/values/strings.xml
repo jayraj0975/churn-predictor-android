@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Churn Predictor</string>
+    <string name="title">Customer churn risk</string>
+    <string name="subtitle">Describe a telecom customer to see how likely they are to leave, and why.</string>
+    <string name="tenure_label">Tenure: %d months</string>
+    <string name="charges_label">Monthly bill: $%.0f</string>
+    <string name="contract">Contract</string>
+    <string name="internet">Internet service</string>
+    <string name="payment">Payment method</string>
+    <string name="services">Services and household</string>
+    <string name="tech_support">Tech support</string>
+    <string name="online_security">Online security</string>
+    <string name="online_backup">Online backup</string>
+    <string name="device_protection">Device protection</string>
+    <string name="streaming_tv">Streaming TV</string>
+    <string name="streaming_movies">Streaming movies</string>
+    <string name="paperless_billing">Paperless billing</string>
+    <string name="senior">Senior citizen</string>
+    <string name="partner">Has a partner</string>
+    <string name="dependents">Has dependents</string>
+    <string name="phone_service">Phone service</string>
+    <string name="multiple_lines">Multiple phone lines</string>
+    <string name="risk_band">%s risk</string>
+    <string name="chance_of_leaving">chance of leaving</string>
+    <string name="loss_line">Annual billing $%.0f, expected annual loss $%.0f</string>
+    <string name="raising">Raising the risk</string>
+    <string name="lowering">Lowering the risk</string>
+    <string name="model_note">Logistic regression trained on %1$s (%2$d customers). Held-out ROC-AUC %3$.3f (95%% interval %4$.3f to %5$.3f). Factors show association learned from past customers, not proven cause. Everything is computed on the device.</string>
+</resources>
