@@ -7,7 +7,7 @@ customer (tenure, bill, contract, services, payment, household) and it shows the
 a risk band, the factors raising and lowering the risk, and a suggested retention step. Everything is
 computed **on the device**, with no network and no backend.
 
-Part of a small set: [`project`](https://github.com/jayraj0975/project) (the analysis),
+Part of a small set: [`customer-churn-analysis`](https://github.com/jayraj0975/customer-churn-analysis) (the analysis),
 [`churnapp`](https://github.com/jayraj0975/churnapp) (the web app) and this Android client. All three
 use the same trained model.
 
