@@ -7,6 +7,8 @@ customer (tenure, bill, contract, services, payment, household) and it shows the
 a risk band, the factors raising and lowering the risk, and a suggested retention step. Everything is
 computed **on the device**, with no network and no backend.
 
+**Try it:** download the debug APK from the [latest release](https://github.com/jayraj0975/churn-predictor-android/releases/latest) and install it on an Android phone (7.0+). It is a debug build, so Android will ask you to allow installing from that source.
+
 Part of a small set: [`customer-churn-analysis`](https://github.com/jayraj0975/customer-churn-analysis) (the analysis),
 [`churnapp`](https://github.com/jayraj0975/churnapp) (the web app) and this Android client. All three
 use the same trained model.
