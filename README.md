@@ -32,8 +32,14 @@ plain Java constants (`ModelData.java`) and the test fixtures, so scoring is
 - **Builds** with Gradle 8.7 and JDK 17 (`assembleDebug`), and **Android lint passes** with errors set to fail the build.
 - CI regenerates the model constants and fails if they differ from what is committed.
 
-Not done: the app has not been run on a device or emulator, so there are no screenshots. The UI is standard
-Material widgets in one layout, but treat the first run as untested.
+**Run on an emulator.** I installed the debug APK on an Android 14 (API 34, x86_64, hardware-accelerated) emulator: it
+launches without a crash, and the on-screen probability matches an independent calculation from `model/model.json`
+(72.0% for the default customer; choosing a two-year contract in the UI recomputes it to 40.2% and moves the band to Moderate).
+It has **not** been tried on a physical phone.
+
+| Default customer | Two-year contract selected |
+|---|---|
+| ![Default](docs/screenshot-default.png) | ![Two year](docs/screenshot-two-year.png) |
 
 ## Build and run
 
