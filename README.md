@@ -31,7 +31,7 @@ plain Java constants (`ModelData.java`) and the test fixtures, so scoring is
   on eight real customers; probabilities move the way the data shows (longer contract, longer tenure and automatic
   payment lower risk); the model is calibrated on the held-out set; bands, driver signs and the expected-loss
   arithmetic are checked.
-- **Builds** with Gradle 8.7 and JDK 17 (`assembleDebug`), and **Android lint passes** with errors set to fail the build.
+- **Builds** with Gradle 9.7.1, Android Gradle Plugin 9.4.1 and JDK 17 (`assembleDebug`), and **Android lint passes** with errors set to fail the build.
 - CI regenerates the model constants and fails if they differ from what is committed.
 
 **Run on an emulator.** I installed the debug APK on an Android 14 (API 34, x86_64, hardware-accelerated) emulator: it
