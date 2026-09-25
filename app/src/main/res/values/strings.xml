@@ -23,8 +23,9 @@
     <string name="multiple_lines">Multiple phone lines</string>
     <string name="risk_band">%s risk</string>
     <string name="chance_of_leaving">chance of leaving</string>
-    <string name="loss_line">Annual billing $%.0f, expected annual loss $%.0f</string>
+    <string name="exposure_line">Annual billing $%.0f, expected annual billing exposure $%.0f (modeled from the risk, not an observed loss)</string>
     <string name="raising">Raising the risk</string>
     <string name="lowering">Lowering the risk</string>
     <string name="model_note">Logistic regression trained on %1$s (%2$d customers). Held-out ROC-AUC %3$.3f (95%% interval %4$.3f to %5$.3f). Factors show association learned from past customers, not proven cause. Everything is computed on the device.</string>
+    <string name="model_provenance">Model v%1$s, trained %2$s, commit %3$s, data SHA-256 %4$s…, coefficients %5$s…, scikit-learn %6$s. The same coefficients as the churnapp web app; not the random forest that the customer-churn-analysis repo selects.</string>
 </resources>

@@ -103,10 +103,10 @@ public class ChurnModelTest {
     }
 
     @Test
-    public void expectedLossIsBillingTimesProbability() {
+    public void expectedExposureIsBillingTimesProbability() {
         ChurnModel.Result r = ChurnModel.predict(base());
         assertEquals(96.5 * 12, r.annualBilling, 1e-9);
-        assertEquals(r.annualBilling * r.probability, r.expectedAnnualLoss, 1e-9);
+        assertEquals(r.annualBilling * r.probability, r.expectedAnnualExposure, 1e-9);
         assertEquals(ChurnModel.probability(base()), r.probability, 1e-12);
     }
 
@@ -116,5 +116,16 @@ public class ChurnModelTest {
         assertEquals(ModelData.KEYS.length, ChurnModel.vector(base()).length);
         assertEquals(ModelData.KEYS.length, ModelData.COEF.length);
         assertEquals(ModelData.KEYS.length, ModelData.MEANS.length);
+    }
+
+    @Test
+    public void modelCarriesItsProvenance() {
+        assertTrue(ModelData.MODEL_VERSION.matches("\\d+\\.\\d+\\.\\d+"));
+        assertTrue(ModelData.DATA_SHA256.matches("[0-9a-f]{64}"));
+        assertTrue(ModelData.COEFFICIENTS_SHA256.matches("[0-9a-f]{64}"));
+        assertTrue(ModelData.FEATURE_SCHEMA_SHA256.matches("[0-9a-f]{64}"));
+        assertFalse(ModelData.SKLEARN_VERSION.isEmpty());
+        assertEquals("abc", MainActivity.shortHash("abcdef", 3));
+        assertEquals("ab", MainActivity.shortHash("ab", 3));
     }
 }

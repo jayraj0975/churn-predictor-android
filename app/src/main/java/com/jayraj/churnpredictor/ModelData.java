@@ -6,6 +6,16 @@ final class ModelData {
 
     static final String ALGORITHM = "Logistic regression (L2, unweighted)";
     static final String TRAINED_ON = "IBM Telco Customer Churn";
+
+    // Provenance, copied from model/model.json (which the web app's trainer writes).
+    static final String MODEL_VERSION = "1.0.0";
+    static final String TRAINED_DATE = "2026-09-25";
+    static final String TRAINING_COMMIT = "3d29b62fd9fee2bfeff319ce71178fb6d6e53f9b";
+    static final String DATA_SHA256 = "3d5c233415c1b42bdea7172c73e620819f507f0a8294bc2337a1d8a8877feef0";
+    static final String COEFFICIENTS_SHA256 = "9980bb7b487a561a9086f10049df4a58ad78e8153aaceff34e25fb06110be202";
+    static final String FEATURE_SCHEMA_SHA256 = "ec6a732391ab0a2ef88d5a263bbf9c73a19a6ee1ca1d9b58994e4e78752b8c4b";
+    static final String SKLEARN_VERSION = "1.9.1";
+
     static final int N_TRAIN = 5625;
     static final int N_TEST = 1407;
     static final double BASE_RATE = 0.26578498293515357;

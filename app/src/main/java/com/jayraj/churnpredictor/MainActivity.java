@@ -11,8 +11,12 @@ import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import java.util.List;
 import java.util.Locale;
@@ -25,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private SeekBar tenureSeek, chargesSeek;
     private TextView tenureLabel, chargesLabel;
     private Spinner contractSpinner, internetSpinner, paymentSpinner;
-    private TextView probabilityText, riskText, recommendationText, driversText, lossText;
+    private TextView probabilityText, riskText, recommendationText, driversText, exposureText;
     private ProgressBar meter;
 
     private final String[] flagKeys = {
@@ -42,7 +46,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Draw behind the system bars on every Android version (Android 15+ enforces this for apps that
+        // target it), and pad the content so nothing hides beneath them. The top inset AppCompat
+        // hands down already includes the app bar, so it is used as is.
+        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.rootScroll), (view, insets) -> {
+            Insets bars = insets.getInsets(
+                    WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout());
+            view.setPadding(bars.left, bars.top, bars.right, bars.bottom);
+            return insets;
+        });
 
         tenureSeek = findViewById(R.id.tenureSeek);
         chargesSeek = findViewById(R.id.chargesSeek);
@@ -55,13 +69,17 @@ public class MainActivity extends AppCompatActivity {
         riskText = findViewById(R.id.riskText);
         recommendationText = findViewById(R.id.recommendationText);
         driversText = findViewById(R.id.driversText);
-        lossText = findViewById(R.id.lossText);
+        exposureText = findViewById(R.id.exposureText);
         meter = findViewById(R.id.meter);
         LinearLayout flagsContainer = findViewById(R.id.flagsContainer);
 
         ((TextView) findViewById(R.id.modelNote)).setText(getString(R.string.model_note,
                 ModelData.TRAINED_ON, ModelData.N_TRAIN + ModelData.N_TEST,
                 ModelData.ROC_AUC, ModelData.ROC_AUC_LOW, ModelData.ROC_AUC_HIGH));
+        ((TextView) findViewById(R.id.modelProvenance)).setText(getString(R.string.model_provenance,
+                ModelData.MODEL_VERSION, ModelData.TRAINED_DATE, shortHash(ModelData.TRAINING_COMMIT, 7),
+                shortHash(ModelData.DATA_SHA256, 12), shortHash(ModelData.COEFFICIENTS_SHA256, 8),
+                ModelData.SKLEARN_VERSION));
 
         bindSpinner(contractSpinner, ChurnModel.CONTRACTS, 0);
         bindSpinner(internetSpinner, ChurnModel.INTERNET_LABELS, 1);
@@ -154,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
                 : r.band.equals("Moderate") ? R.color.risk_moderate : R.color.risk_low;
         riskText.setTextColor(ContextCompat.getColor(this, color));
         recommendationText.setText(r.recommendation);
-        lossText.setText(getString(R.string.loss_line, r.annualBilling, r.expectedAnnualLoss));
+        exposureText.setText(getString(R.string.exposure_line, r.annualBilling, r.expectedAnnualExposure));
         driversText.setText(drivers(r));
     }
 
@@ -175,5 +193,10 @@ public class MainActivity extends AppCompatActivity {
         for (ChurnModel.Driver d : drivers) {
             sb.append(String.format(Locale.US, "  %+.1f pts  %s\n", d.points, d.label));
         }
+    }
+
+    /** The first {@code n} characters of a hash or commit id, for display. */
+    static String shortHash(String value, int n) {
+        return value.length() <= n ? value : value.substring(0, n);
     }
 }

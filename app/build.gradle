@@ -9,14 +9,31 @@ android {
     defaultConfig {
         applicationId "com.jayraj.churnpredictor"
         minSdk 24
-        targetSdk 34
-        versionCode 1
-        versionName "1.0"
+        targetSdk 36
+        versionCode 2
+        versionName "1.1"
+    }
+
+    // Release signing comes from the environment, so no key or password is ever in the repository.
+    // Without CHURN_KEYSTORE the release build is produced unsigned.
+    def keystorePath = System.getenv('CHURN_KEYSTORE')
+    signingConfigs {
+        if (keystorePath) {
+            release {
+                storeFile file(keystorePath)
+                storePassword System.getenv('CHURN_KEYSTORE_PASSWORD')
+                keyAlias System.getenv('CHURN_KEY_ALIAS') ?: 'churnpredictor'
+                keyPassword System.getenv('CHURN_KEY_PASSWORD') ?: System.getenv('CHURN_KEYSTORE_PASSWORD')
+            }
+        }
     }
 
     buildTypes {
         release {
             minifyEnabled false
+            if (keystorePath) {
+                signingConfig signingConfigs.release
+            }
         }
     }
     compileOptions {

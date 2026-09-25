@@ -56,7 +56,7 @@ public final class ChurnModel {
         public final List<Driver> raising;
         public final List<Driver> lowering;
         public final double annualBilling;
-        public final double expectedAnnualLoss;
+        public final double expectedAnnualExposure;
 
         Result(double probability, String band, String recommendation,
                List<Driver> raising, List<Driver> lowering, double annualBilling) {
@@ -66,7 +66,7 @@ public final class ChurnModel {
             this.raising = raising;
             this.lowering = lowering;
             this.annualBilling = annualBilling;
-            this.expectedAnnualLoss = annualBilling * probability;
+            this.expectedAnnualExposure = annualBilling * probability;
         }
     }
 

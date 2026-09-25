@@ -1,5 +1,8 @@
 name: ci
 on: [push, pull_request]
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: read
 jobs:
@@ -18,7 +21,7 @@ jobs:
         run: |
           python3 tools/generate_model.py
           git diff --exit-code -- app/src
-      - run: ./gradlew testDebugUnitTest lintDebug assembleDebug --console=plain
+      - run: ./gradlew testDebugUnitTest lintDebug assembleDebug assembleRelease --console=plain
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: app-debug

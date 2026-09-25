@@ -1,6 +1,7 @@
 """Generate the Java model constants and test fixtures from model/model.json.
 
-model.json is the artifact exported by the web app's trainer
+model.json is the artifact exported by the web app's trainer, copied byte for byte from
+churnapp's src/lib/model.json (so the two apps serve the same coefficients, and it carries the model's provenance)
 (https://github.com/jayraj0975/churnapp, scripts/train_model.py): a logistic
 regression fitted on IBM's Telco churn data, in raw feature units. This script
 turns it into plain Java so the Android app scores customers with no runtime
@@ -37,6 +38,16 @@ final class ModelData {{
 
     static final String ALGORITHM = {jstr(m["algorithm"])};
     static final String TRAINED_ON = {jstr(m["trainedOn"])};
+
+    // Provenance, copied from model/model.json (which the web app's trainer writes).
+    static final String MODEL_VERSION = {jstr(m["modelVersion"])};
+    static final String TRAINED_DATE = {jstr(m["trainedDate"])};
+    static final String TRAINING_COMMIT = {jstr(m["provenance"]["trainingCommit"] or "unknown")};
+    static final String DATA_SHA256 = {jstr(m["provenance"]["dataSha256"])};
+    static final String COEFFICIENTS_SHA256 = {jstr(m["provenance"]["coefficientsSha256"])};
+    static final String FEATURE_SCHEMA_SHA256 = {jstr(m["provenance"]["featureSchemaSha256"])};
+    static final String SKLEARN_VERSION = {jstr(m["provenance"]["sklearn"])};
+
     static final int N_TRAIN = {m["nTrain"]};
     static final int N_TEST = {m["nTest"]};
     static final double BASE_RATE = {m["baseRate"]!r};
