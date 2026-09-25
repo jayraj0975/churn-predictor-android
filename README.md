@@ -32,7 +32,7 @@ revenue history, so it is not lifetime value and not money a business is guarant
 
 ## Verified
 
-- **7 unit tests** run on a plain JVM: the Java model matches **scikit-learn's own predictions to 1e-9**
+- **8 unit tests** run on a plain JVM: the Java model matches **scikit-learn's own predictions to 1e-9**
   on eight real customers; probabilities move the way the data shows (longer contract, longer tenure and automatic
   payment lower risk); the model is calibrated on the held-out set; bands, driver signs and the expected-loss
   arithmetic are checked.
